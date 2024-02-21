@@ -1,14 +1,13 @@
 
 # NLP Location Provider
-Network Location Provider can use in POS device and smart android device sdk .
+Network Location Provider can be used in POS devices and smart Android device sdk.
 
-
-## Sopports Android 7 - 14 (Nougat-to-UPSIDE_DOWN_CAKE):
+## Supports Android 7 - 14 (Nougat-to-UPSIDE_DOWN_CAKE):
 **Systems app tracking cases:**
-**Network Location Provider is provided for you to:**
-1. Will read data from cellular GNSS information  from App
-2. and will calculate and parse  location information ,
-3. view and analyze carrier phase (if it is present in the log file).
+**Network Location Provider will:**
+1. Read data from cellular GNSS information from the App
+2. Calculate and parse location information,
+3. View and Analyze the carrier phase(if it is present in the log file).
 
 ## Install the library
     implementation ("com.github.ASTITeam:nlplib:1.0.0"){ transitive = true }
@@ -17,7 +16,7 @@ Or if the library is to be used only for debug builds and not release builds, th
 
     debugImplementation ("com.github.ASTITeam:nlplib:1.0.0"){ transitive = true }
 
-Add repository maven url, If required to find repositories version:
+Add the repository maven URL in the settings.properties or the maven settings, If required to find the repository version:
 
     repositories 
     {
@@ -27,11 +26,12 @@ Add repository maven url, If required to find repositories version:
         }
     }
 
-## Initialize start and stop location latlng's
+## Initialize start and stop location lat/lng's in your class
 
 **Start POS Location Service to capture Location using LocationListener:**
 
-      POSLocationBuilder poslocationBuilder = new POSLocationBuilder(getContext(), CLIENT_TOKEN, new CustomLocationListener() {
+     POSLocationBuilder poslocationBuilder = new POSLocationBuilder(getContext(), CLIENT_TOKEN, new CustomLocationListener() 
+      {
             @Override
             public void onLocationChanged(CustomLocation customLoc) {
                 printLog("loc","provider: "+location.getProvider()
@@ -39,22 +39,22 @@ Add repository maven url, If required to find repositories version:
                         +" accuracy: "+location.getAccuracy() +" time: "+location.getTime(),Color.WHITE);
             }
         });
-    //interval in min's min 2 minutes
+    //interval in min's min 2 minutes - can be changed based on the configuration - Min should be 2 min
     poslocationBuilder.setIntervalTimeInMins(2);
     poslocationBuilder.startLocationCapture();
 
 **Stop location capturing:**
+
     poslocationBuilder.stopLocationCapture();
 
-Last Recorded Location: (Required to start POSLocationProviderService service
-to get last Recorded location)
+**Last Recorded Location:** (Required to start POSLocationProviderService service to get the last Recorded location)
 
-    POSLocationBuilder.getLocation(getContext())
+    POSLocationBuilder.getLocation(getContext());
 
-For Sample Location fragment initialization:
-
-      LoggerFragment editProfileFragment = LoggerFragment.getInstance("CLIENT_TOKEN");
-            fragmentManger.beginTransaction()
-                    .replace(R.id.logger_fragment, editProfileFragment)
-                    .addToBackStack(null)
-                    .commit();
+**For Sample Location fragment initialization:**
+    
+    LoggerFragment editProfileFragment = LoggerFragment.getInstance("CLIENT_TOKEN");
+    fragmentManger.beginTransaction()
+    .replace(R.id.logger_fragment, editProfileFragment)
+    .addToBackStack(null)
+    .commit();
