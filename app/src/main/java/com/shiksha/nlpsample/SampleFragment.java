@@ -44,7 +44,7 @@ public class SampleFragment extends Fragment
         implements CustomLocationListener
 {
 
-    private static final String CLIENT_TOKEN = "";
+    private static final String CLIENT_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQxNTAiLCJpYXQiOjE3MDc5MzA3NjksImV4cCI6MTcwODAxNzE2OX0.5CdlzBBF5PQfDMzv_xI3ADCZPOL8lAQWmg7O4a4jZx0";
     private TextView mLogView;
     private ScrollView mScrollView;
     private Button mStartLog;
