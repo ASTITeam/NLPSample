@@ -48,6 +48,6 @@ dependencies {
     /*implementation ('com.github.ASTITeam:nlplib:1.0.4@aar') {
         changing = true
     }*/
-    implementation ('com.github.ASTITeam:poslocator:1.0.3') { changing = true }
+    implementation ('com.github.ASTITeam:poslocator:1.0.4') { changing = true }
 
 }

@@ -26,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ public class SampleFragment extends Fragment
         implements CustomLocationListener
 {
 
-    private static final String CLIENT_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQxNTAiLCJpYXQiOjE3MDc5MzA3NjksImV4cCI6MTcwODAxNzE2OX0.5CdlzBBF5PQfDMzv_xI3ADCZPOL8lAQWmg7O4a4jZx0";
+    private static final String CLIENT_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGlraGF0ZWNoIiwiaWF0IjoxNzE1MzI5ODIxLCJleHAiOjE3MTU0MTYyMjF9.h6sYRr0eMJvOASCV9zgvaJfBllXsKhDTOvJQPAAst6E";
     private TextView mLogView;
     private ScrollView mScrollView;
     private Button mStartLog;

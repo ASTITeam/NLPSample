@@ -7,7 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import org.shiksha.nlp.loc.posloc.NetworkProvideManager;
+import org.shiksha.nlp.loc.posloc.utility.NetworkProvideManager;
 
 
 public class MainActivity extends AppCompatActivity {
