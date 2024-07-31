@@ -45,15 +45,16 @@ public class SampleFragment extends Fragment
         implements CustomLocationListener
 {
 
-    private static final String CLIENT_TOKEN = "";
+    private static String CLIENT_TOKEN = "";
     private TextView mLogView;
+    EditText appKeyEt;
     private ScrollView mScrollView;
     private Button mStartLog;
     private Button autoScollBtn;
     private Button mStopLog;
     private static boolean autoScroll = true;
 
-    private static final int MAX_LENGTH = 42000;
+    private static final int MAX_LENGTH = 100000;
     private static final int LOWER_THRESHOLD = (int) (MAX_LENGTH * 0.5);
     private POSLocationBuilder poslocationBuilder;
 
@@ -64,9 +65,17 @@ public class SampleFragment extends Fragment
     }
 
     private void startLocationService() {
-        if(poslocationBuilder ==null){
+        if(CLIENT_TOKEN==null || CLIENT_TOKEN.isEmpty()){
+            Toast.makeText(requireContext(), "Client Token not set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        CLIENT_TOKEN=CLIENT_TOKEN.replace(" ", "");
+        printLog("Location","Starting location service, Please wait",Color.WHITE);
+        if(poslocationBuilder==null)
+        {
             poslocationBuilder = new POSLocationBuilder(getContext(),CLIENT_TOKEN, this);
         }
+        poslocationBuilder.setClientToken(CLIENT_TOKEN);
         //interval in min's min 2 minutes
         poslocationBuilder.setIntervalTimeInMins(2);
         poslocationBuilder.startLocationCapture();
@@ -75,6 +84,12 @@ public class SampleFragment extends Fragment
     @Override
     public void onPause() {
         super.onPause();
+//        stopLocationCapture();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         stopLocationCapture();
     }
 
@@ -90,6 +105,7 @@ public class SampleFragment extends Fragment
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View newView = inflater.inflate(R.layout.fragment_log, container, false /* attachToRoot */);
         mLogView = (TextView) newView.findViewById(R.id.log_view);
+        appKeyEt = (EditText) newView.findViewById(R.id.app_key_et);
         mScrollView = (ScrollView) newView.findViewById(R.id.log_scroll);
 
         Button start = (Button) newView.findViewById(R.id.start_log);
@@ -109,9 +125,10 @@ public class SampleFragment extends Fragment
         mStartLog = (Button) newView.findViewById(R.id.start_logs);
         mStopLog = (Button) newView.findViewById(R.id.stop);
         enableOptions( /* start */);
-
+        appKeyEt.setText(CLIENT_TOKEN);
         mStartLog.setOnClickListener(
                 view -> {
+                    CLIENT_TOKEN = appKeyEt.getText().toString();
 //                    enableOptions(false /* start */);
                     Toast.makeText(getContext(), R.string.start_message, Toast.LENGTH_LONG).show();
                     startLocationService();
@@ -126,11 +143,11 @@ public class SampleFragment extends Fragment
 
         autoScollBtn.setOnClickListener(v->{
             autoScroll=!autoScroll;
-            printLog("Auto Scroll","Status: "+autoScroll, Color.WHITE);
+//            printLog("Auto Scroll","Status: "+autoScroll, Color.WHITE);
         });
         mLogView.setOnTouchListener((v, event) -> {
             autoScroll=false;
-            printLog("Auto Scroll","Status: "+autoScroll, Color.WHITE);
+//            printLog("Auto Scroll","Status: "+autoScroll, Color.WHITE);
             return false;
         });
         return newView;
